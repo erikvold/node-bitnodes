@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+var VERSION = require("../package.json").version;
+var program = require("commander");
+var bitnodes = require("../index");
+var getLeaderboard = bitnodes.getLeaderboard;
+var getSnapshots = bitnodes.getSnapshots;
+var getLatency = bitnodes.getLatency;
+var getNodeStatus = bitnodes.getNodeStatus;
+
+
+program
+  .version(VERSION)
+  .option("-p, --port <port>", "Port to use.")
+  .option("-a, --address <address>", "IP address.");
+
+program
+  .command("leaderboard")
+  .description("List all activated nodes according to their Peer Index (PIX) in descending order.")
+  .action(function() {
+    console.log("leaderboard:")
+    getLeaderboard().then(function(data) {
+      console.log(data);
+    });
+  });
+
+program
+  .command("snapshots")
+  .description("List all snapshots that are available on the server from the latest to oldest snapshot.")
+  .action(function() {
+    console.log("snapshots:")
+    getSnapshots().then(function(data) {
+      console.log(data);
+    }).catch(function(err) {
+      console.warn(err);
+    });
+  });
+
+program
+  .command("latency")
+  .description("Get daily latency and weekly latency for an activated node.")
+  .action(function() {
+    getLatency().then(function(data) {
+      var latency = data['daily_latency'][0].v;
+      if (latency > 0) {
+        console.log(latency + "ms");
+      }
+      else if (latency === 0) {
+        console.log("no latency data is available.");
+      }
+      else {
+        console.log("unreachable");
+      }
+    }).catch(function(err) {
+      console.warn(err);
+    });
+  });
+
+program
+  .command("status")
+  .description("Get status for an activated node.")
+  .action(function() {
+    getNodeStatus().
+    then(function(data) {
+      console.log(data);
+    }).
+    catch(function(err) {
+      console.warn(err);
+    });
+  });
+
+program
+  .command("help")
+  .description("Show help.")
+  .action(function() {
+    program.help()
+  });
+
+program.parse(process.argv);

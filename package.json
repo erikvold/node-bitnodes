@@ -1,0 +1,25 @@
+{
+  "name": "bitnodes",
+  "version": "0.0.1",
+  "description": "Bitnodes is currently being developed to estimate the size of the Bitcoin network by finding all the reachable nodes in the network.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "bitnodes": "./bin/bitnodes"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitnodes",
+    "21co"
+  ],
+  "author": "Erik Vold",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "externalip": "^1.0.1",
+    "promise": "^7.0.4",
+    "request": "^2.64.0"
+  }
+}
