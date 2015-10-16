@@ -15,6 +15,14 @@
     "21co"
   ],
   "author": "Erik Vold",
+  "homepage": "https://github.com/erikvold/node-bitnodes",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/erikvold/node-bitnodes.git"
+  },
+  "bugs": {
+    "url": "http://github.com/erikvold/node-bitnodes/issues"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^2.8.1",
